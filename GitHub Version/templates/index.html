@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoListe</title>
+    <style>
+        body {
+            background-color: #060328;
+            margin: 20px;
+        }
+
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #1b1540;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+
+        .todo-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .todo-form textarea {
+            flex: 1;
+            min-height: 40px;
+            max-height: 120px;
+            resize: vertical;
+            font-size: 16px;
+            border-radius: 8px;
+            padding: 8px 10px;
+            border: none;
+        }
+
+        .todo-form button {
+            width: 100px;
+            height: 40px;
+            font-size: 16px;
+            border-radius: 8px;
+            background-color: #1ac9cf;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .todo-form button:hover {
+            background-color: #3ce0d3;
+        }
+    </style>
+</head>
+<body>
+    <h1>ToDo-Liste</h1>
+
+    <div class="container">
+        {% for todo in todos %}
+            <div class="card">
+                {{ todo.content }}
+                <a href="{{ url_for('delete_todo', id=todo.id) }}" style="float:right; color:#ff4c4c; text-decoration:none;">✖</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form class="todo-form" action="" method="POST">
+        <textarea placeholder="Neues Todo" name="content"></textarea>
+        <button type="submit">Hinzufügen</button>
+    </form>
+</body>
+</html>
